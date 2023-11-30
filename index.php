@@ -1,5 +1,18 @@
 <?php
     session_start();
+    $login = 'admin';
+    $password = '123';
+  
+    if (!empty($_POST)) {
+        if ($_POST['login'] == $password) {
+            $_SESSION['auth'] = 1;
+            $_SESSION['res'] = 'Вы авторизовались!';
+
+        } else {
+           $_SESSION['error'] = 'Неверный логин или пароль!';
+
+        }
+    }
 ?>
 
 <!DOCTYPE html>
