@@ -1,16 +1,19 @@
 <?php
     session_start();
     $login = 'admin';
-    $password = '123';
+    $password = '$2y$10$Yd1VDHiqeMWbDzKMCzXryOg5bapRd6g0cuLEyAuNjR6yCJCevQgE.';
   
     if (!empty($_POST)) {
-        if ($_POST['login'] == $password) {
+        if ($_POST['login'] == $login && password_verify($_POST['password'], $password)) {
             $_SESSION['auth'] = 1;
             $_SESSION['res'] = 'Вы авторизовались!';
+            header("Location: secret.php");
+            exit();
 
         } else {
            $_SESSION['error'] = 'Неверный логин или пароль!';
-
+           header("Location: index.php");
+            exit();
         }
     }
 ?>
@@ -32,6 +35,17 @@
         <p>Password: <input type="password" name="password"></p>
         <button type="submit" name="submit">Login</button>
     </form>
+
+
+    <?php
+    if (isset($_SESSION['res'])) {
+        echo  $_SESSION['res'];
+        unset($_SESSION['res']);
+    } else if (isset($_SESSION['error'])) {
+        echo  $_SESSION['error'];
+        unset($_SESSION['error']);
+    }
+?>
 
 </body>
 </html>
