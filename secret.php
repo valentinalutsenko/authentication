@@ -1,5 +1,11 @@
 <?php
     session_start();
+    if (isset($_GET['do']) && $_GET['do'] == 'logout') {
+        unset($_SESSION['auth']);
+        $_SESSION['res'] = 'Вы вышли';
+        header('Location: index.php');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +25,10 @@
     <?php else: ?>
     <h2>Вы не авторизованы!</h2>
     <?php endif; ?>
+
+    <button>
+        <a href="?do=logout">Logout</a>
+    </button>
   
 </body>
 </html> 
