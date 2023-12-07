@@ -1,5 +1,7 @@
 <?php
     session_start();
+
+    //Условие для разлогинивания
     if (isset($_GET['do']) && $_GET['do'] == 'logout') {
         unset($_SESSION['auth']);
         $_SESSION['res'] = 'Вы вышли';

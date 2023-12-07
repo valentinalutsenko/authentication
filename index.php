@@ -1,8 +1,11 @@
 <?php
     session_start();
     $login = 'admin';
+
+    // использую функцию  password_hash()  для хеширования пароля
     $password = '$2y$10$Yd1VDHiqeMWbDzKMCzXryOg5bapRd6g0cuLEyAuNjR6yCJCevQgE.';
   
+
     if (!empty($_POST)) {
         if ($_POST['login'] == $login && password_verify($_POST['password'], $password)) {
             $_SESSION['auth'] = 1;
@@ -38,6 +41,8 @@
 
 
     <?php
+    
+    // Вывод текста при удачной/не удачной авторизации 
     if (isset($_SESSION['res'])) {
         echo  $_SESSION['res'];
         unset($_SESSION['res']);
